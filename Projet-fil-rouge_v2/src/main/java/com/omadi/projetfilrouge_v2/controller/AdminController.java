@@ -3,7 +3,6 @@ package com.omadi.projetfilrouge_v2.controller;
 
 import com.omadi.projetfilrouge_v2.entities.Utilisateurs;
 import com.omadi.projetfilrouge_v2.services.UtilisateurService;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("admin")
 @CrossOrigin("*")
-public class UtilisateurController {
+public class AdminController {
     private final UtilisateurService utilisateurService;
 
-    public UtilisateurController(UtilisateurService utilisateurService) {
+    public AdminController(UtilisateurService utilisateurService) {
         this.utilisateurService = utilisateurService;
     }
     @GetMapping
@@ -74,5 +73,4 @@ public class UtilisateurController {
                     .body("Utilisateur introuvable ");
         }
     }
-
 }

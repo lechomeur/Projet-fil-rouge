@@ -7,17 +7,22 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable() // désactive CSRF pour les tests API (optionnel selon ton usage)
-                .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().permitAll() // autorise toutes les requêtes
-                )
-                .formLogin().disable()      // désactive la page de login form
-                .httpBasic().disable();     // désactive http basic
-
-        return http.build();
+        @Bean
+        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+            http
+                    .csrf(csrf -> csrf.disable()) // désactivation CSRF pour tests API
+                    .authorizeHttpRequests(auth -> auth
+                            .requestMatchers("/admin/**").hasRole("ADMIN")
+                            .requestMatchers("/tresorier/**").hasAnyRole("ADMIN", "TRESORIER")
+                            .requestMatchers("/user/**").hasAnyRole("ADMIN", "TRESORIER", "ADHERENT")
+                            .requestMatchers("/public/**", "/h2-console/**", "/auth").permitAll()
+                            .anyRequest().authenticated()
+                    )
+                    .formLogin(form -> form.disable())
+                    .httpBasic(httpBasic -> httpBasic.disable())
+                    .headers(headers -> headers.frameOptions(frame -> frame.disable()));
+            return http.build();
+        }
     }
-}
+
+
