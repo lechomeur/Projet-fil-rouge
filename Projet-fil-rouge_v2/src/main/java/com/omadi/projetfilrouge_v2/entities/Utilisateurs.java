@@ -1,7 +1,10 @@
 package com.omadi.projetfilrouge_v2.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Utilisateurs {
@@ -9,10 +12,11 @@ public class Utilisateurs {
     @Id
     private Long id;
     private String nom;
+    @JsonIgnore
     private String mot_de_passe;
     private String prenom;
-    private String nom_utilisateur;
-    private String email;
+    @Column(name = "nom_utilisateur") // mapping vers la colonne SQL
+    private String nomUtilisateur;    private String email;
 
     public Long getId() {
         return id;
@@ -46,11 +50,11 @@ public class Utilisateurs {
     }
 
     public String getNom_utilisateur() {
-        return nom_utilisateur;
+        return nomUtilisateur;
     }
 
     public void setNom_utilisateur(String nom_utilisateur) {
-        this.nom_utilisateur = nom_utilisateur;
+        this.nomUtilisateur = nom_utilisateur;
     }
 
     public String getEmail() {

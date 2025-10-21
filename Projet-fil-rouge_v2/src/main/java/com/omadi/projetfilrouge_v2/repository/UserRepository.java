@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<Utilisateurs, Long>, JpaSpecificationExecutor<Utilisateurs> {
 
- //  Utilisateurs findByNomUtilisateur(String nom_utilisateur);
+   Utilisateurs findByNomUtilisateur(String nom_utilisateur);
 
 }
