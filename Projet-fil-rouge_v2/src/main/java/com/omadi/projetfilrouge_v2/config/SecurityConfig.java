@@ -1,4 +1,4 @@
-package com.omadi.projetfilrouge_v2.entities;
+package com.omadi.projetfilrouge_v2.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +15,7 @@ public class SecurityConfig {
                             .requestMatchers("/admin/**").hasRole("ADMIN")
                             .requestMatchers("/tresorier/**").hasAnyRole("ADMIN", "TRESORIER")
                             .requestMatchers("/user/**").hasAnyRole("ADMIN", "TRESORIER", "ADHERENT")
-                            .requestMatchers("/public/**", "/h2-console/**", "/auth").permitAll()
+                            .requestMatchers("/public/**", "/h2-console/**", "/auth/**").permitAll()
                             .anyRequest().authenticated()
                     )
                     .formLogin(form -> form.disable())

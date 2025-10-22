@@ -38,7 +38,8 @@ public class JwtService {
                 .claims(Map.of("role", role))
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + accessExpiration))
-                .signWith(SignatureAlgorithm.HS256,accessSecret)
+                .signWith(Keys.hmacShaKeyFor(accessSecret.getBytes(StandardCharsets.UTF_8)), SignatureAlgorithm.HS256)
+
                 .compact();
     }
 
@@ -47,7 +48,8 @@ public class JwtService {
                 .subject(username)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + refreshExpiration))
-                .signWith(SignatureAlgorithm.HS256,refreshSecret)
+                .signWith(Keys.hmacShaKeyFor(refreshSecret.getBytes(StandardCharsets.UTF_8)), SignatureAlgorithm.HS256)
+
                 .compact();
     }
     public boolean validateToken(String token, boolean isRefresh) {

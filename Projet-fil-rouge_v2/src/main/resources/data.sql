@@ -22,7 +22,7 @@ CREATE TABLE utilisateurs (
 INSERT INTO utilisateurs (nom, prenom, nom_utilisateur, email, mot_de_passe, role)
 VALUES
     ('Dupont', 'Marie', 'mdupont', 'marie.dupont@email.com', HASH('MD5', 'toto'), 'ADMIN'),
-    ('Toto', 'Curie', 'toto', 'curie.toto@email.com', HASH('MD5', 'toto'), 'ADMIN'),
+    ('Toto', 'Curie', 'toto', 'curie.toto@email.com','toto', 'ADMIN'),
     ('Bernard', 'Lucas', 'lbernard', 'lucas.bernard@email.com', HASH('MD5', 'toto'), 'TRESORIER'),
     ('Martin', 'Sophie', 'smartin', 'sophie.martin@email.com', HASH('MD5', 'toto'), 'TRESORIER'),
     ('Durand', 'Paul', 'pdurand', 'paul.durand@email.com', HASH('MD5', 'toto'), 'ADHERENT'),
