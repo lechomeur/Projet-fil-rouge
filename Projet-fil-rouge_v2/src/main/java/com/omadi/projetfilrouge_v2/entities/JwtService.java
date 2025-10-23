@@ -45,8 +45,8 @@ public class JwtService {
                 .expiration(new Date(System.currentTimeMillis() + accessExpiration))
                 .signWith(accessKey)
                 .compact();
-        System.out.println("🎟️ Token généré pour l'utilisateur : " + username);
-        System.out.println("🔑 Rôle ajouté dans le token : " + role);
+        System.out.println(" Token généré pour l'utilisateur : " + username);
+        System.out.println("Rôle ajouté dans le token : " + role);
         return token;
     }
     public String generateRefreshToken(String username) {
@@ -63,9 +63,9 @@ public class JwtService {
             Key key = isRefresh ? refreshKey : accessKey;
 
             Jwts.parser()
-                    .verifyWith((SecretKey) key)          // ✅ nouvelle syntaxe
+                    .verifyWith((SecretKey) key)
                     .build()
-                    .parseSignedClaims(token); // ✅ remplace parseClaimsJws()
+                    .parseSignedClaims(token);
 
         } catch (ExpiredJwtException e) {
             throw new JwtException("TOKEN_EXPIRED");
