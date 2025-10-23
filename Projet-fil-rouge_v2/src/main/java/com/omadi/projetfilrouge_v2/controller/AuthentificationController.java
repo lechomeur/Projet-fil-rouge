@@ -24,7 +24,7 @@ public  class AuthentificationController {
     }
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Utilisateurs request) {
-        System.out.println("✅ [DEBUG] Requête reçue sur /auth/login avec utilisateur : " + request.getNom_utilisateur());
+        System.out.println("Requête reçue sur /auth/login avec utilisateur : " + request.getNom_utilisateur());
         Optional<Utilisateurs> user = authentificationService.getByUsername(request.getNom_utilisateur());
         if (user.isEmpty()) {
             return ResponseEntity.status(401).body("Identifiants manquant");

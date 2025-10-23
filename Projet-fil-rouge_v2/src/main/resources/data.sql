@@ -23,7 +23,7 @@ INSERT INTO utilisateurs (nom, prenom, nom_utilisateur, email, mot_de_passe, rol
 VALUES
     ('Dupont', 'Marie', 'mdupont', 'marie.dupont@email.com', HASH('MD5', 'toto'), 'ADMIN'),
     ('Toto', 'Curie', 'toto', 'curie.toto@email.com','toto', 'ADMIN'),
-    ('Bernard', 'Lucas', 'lbernard', 'lucas.bernard@email.com', HASH('MD5', 'toto'), 'TRESORIER'),
+    ('Bernard', 'Lucas', 'lbernard', 'lucas.bernard@email.com', 'toto', 'TRESORIER'),
     ('Martin', 'Sophie', 'smartin', 'sophie.martin@email.com', HASH('MD5', 'toto'), 'TRESORIER'),
     ('Durand', 'Paul', 'pdurand', 'paul.durand@email.com', HASH('MD5', 'toto'), 'ADHERENT'),
     ('Petit', 'Emma', 'epetit', 'emma.petit@email.com', HASH('MD5', 'toto'), 'ADHERENT'),
