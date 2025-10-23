@@ -50,6 +50,6 @@ public  class AuthentificationController {
     }
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Utilisateurs request) {
-         
+      return null;
     }
 }

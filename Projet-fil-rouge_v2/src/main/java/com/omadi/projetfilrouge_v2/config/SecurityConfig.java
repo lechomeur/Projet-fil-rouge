@@ -4,25 +4,32 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 public class SecurityConfig {
-        @Bean
-        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-            http
-                    .csrf(csrf -> csrf.disable()) // désactivation CSRF pour tests API
-                    .authorizeHttpRequests(auth -> auth
-                            .requestMatchers("/admin/**").hasRole("ADMIN")
-                            .requestMatchers("/tresorier/**").hasAnyRole("ADMIN", "TRESORIER")
-                            .requestMatchers("/user/**").hasAnyRole("ADMIN", "TRESORIER", "ADHERENT")
-                            .requestMatchers("/public/**", "/h2-console/**", "/auth/**").permitAll()
-                            .anyRequest().authenticated()
-                    )
-                    .formLogin(form -> form.disable())
-                    .httpBasic(httpBasic -> httpBasic.disable())
-                    .headers(headers -> headers.frameOptions(frame -> frame.disable()));
-            return http.build();
-        }
+
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
-
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/auth/**", "/public/**", "/h2-console/**").permitAll()
+                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                        .requestMatchers("/tresorier/**").hasAnyRole("ADMIN", "TRESORIER")
+                        .requestMatchers("/user/**").hasAnyRole("ADMIN", "TRESORIER", "ADHERENT")
+                        .anyRequest().authenticated()
+                )
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .formLogin(form -> form.disable())
+                .httpBasic(httpBasic -> httpBasic.disable())
+                .headers(headers -> headers.frameOptions(frame -> frame.disable()));
+        return http.build();
+    }
+}

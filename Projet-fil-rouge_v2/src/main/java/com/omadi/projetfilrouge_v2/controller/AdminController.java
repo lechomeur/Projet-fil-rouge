@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("admin")
-@CrossOrigin("*")
 public class AdminController {
     private final UtilisateurService utilisateurService;
 
