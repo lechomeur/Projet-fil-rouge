@@ -48,7 +48,6 @@ public  class AuthentificationController {
             return ResponseEntity.status(500).body("Erreur interne lors de la génération du token");
         }
     }
-
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Utilisateurs request) {
         try {
@@ -73,7 +72,6 @@ public  class AuthentificationController {
             return ResponseEntity.status(500).body(Map.of("error", e.getMessage()));
         }
     }
-
     @PostMapping("/refresh")
     public  ResponseEntity<?> refresh(@RequestBody Map<String, String> body) {
         try {
@@ -104,6 +102,23 @@ public  class AuthentificationController {
             return ResponseEntity.status(500).body(Map.of("error", "Erreur interne lors du refresh"));
         }
     }
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(@RequestBody Map<String, String> body) {
+        String refreshToken = body.get("refresh_token");
+        if (refreshToken == null || refreshToken.isEmpty()) {
+            return ResponseEntity.status(400).body(Map.of("error", "Le refresh token est manquant"));
+        }
+        try {
+            jwtService.validateToken(refreshToken, true);
+            String username = jwtService.extractUsername(refreshToken, true);
+            validRefreshTokens.remove(username);
+            return ResponseEntity.ok(Map.of("message", "Déconnexion réussie pour " + username));
+
+        } catch (Exception e) {
+            return ResponseEntity.status(401).body(Map.of("error", "Token invalide ou déjà expiré"));
+        }
+    }
+
 }
 
 

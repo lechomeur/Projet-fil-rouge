@@ -1,0 +1,151 @@
+openapi: 3.0.3
+info:
+  title: API d'Authentification - Projet Fil Rouge
+  version: 1.0.0
+  description: >
+    Documentation manuelle de l'API d'authentification :
+    permet de gérer la connexion, l'enregistrement, le rafraîchissement et la déconnexion des utilisateurs.
+
+servers:
+  - url: http://localhost:8080
+    description: Serveur local de développement
+
+paths:
+  /auth/login:
+    post:
+      summary: Connexion utilisateur
+      description: Vérifie les identifiants et renvoie des tokens JWT.
+      tags: [Authentification]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Connexion réussie, tokens retournés
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthTokens'
+        '401':
+          description: Identifiants incorrects
+        '404':
+          description: Utilisateur inexistant
+
+  /auth/register:
+    post:
+      summary: Enregistrement d'un nouvel utilisateur
+      tags: [Authentification]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '200':
+          description: Utilisateur créé avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '409':
+          description: Utilisateur déjà existant
+
+  /auth/refresh:
+    post:
+      summary: Rafraîchir un token d'accès
+      tags: [Authentification]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshRequest'
+      responses:
+        '200':
+          description: Nouveau token généré
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthTokens'
+        '401':
+          description: Token invalide ou expiré
+
+  /auth/logout:
+    post:
+      summary: Déconnexion de l'utilisateur
+      tags: [Authentification]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshRequest'
+      responses:
+        '200':
+          description: Déconnexion réussie
+        '401':
+          description: Token invalide
+
+components:
+  schemas:
+    LoginRequest:
+      type: object
+      properties:
+        nom_utilisateur:
+          type: string
+          example: "john"
+        mot_de_passe:
+          type: string
+          example: "password123"
+      required: [nom_utilisateur, mot_de_passe]
+
+    RegisterRequest:
+      type: object
+      properties:
+        nom_utilisateur:
+          type: string
+        mot_de_passe:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          example: "ROLE_USER"
+      required: [nom_utilisateur, mot_de_passe, email]
+
+    RefreshRequest:
+      type: object
+      properties:
+        refresh_token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+      required: [refresh_token]
+
+    AuthTokens:
+      type: object
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nom_utilisateur:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+        access_token:
+          type: string
+        refresh_token:
+          type: string
