@@ -21,17 +21,17 @@ CREATE TABLE utilisateurs (
 
 INSERT INTO utilisateurs (nom, prenom, nom_utilisateur, email, mot_de_passe, role)
 VALUES
-    ('Dupont', 'Marie', 'mdupont', 'marie.dupont@email.com', HASH('MD5', 'toto'), 'ADMIN'),
-    ('Toto', 'Curie', 'toto', 'curie.toto@email.com','toto', 'ADMIN'),
-    ('Bernard', 'Lucas', 'lbernard', 'lucas.bernard@email.com', 'toto', 'TRESORIER'),
-    ('Martin', 'Sophie', 'smartin', 'sophie.martin@email.com', HASH('MD5', 'toto'), 'TRESORIER'),
-    ('Durand', 'Paul', 'pdurand', 'paul.durand@email.com', HASH('MD5', 'toto'), 'ADHERENT'),
-    ('Petit', 'Emma', 'epetit', 'emma.petit@email.com', HASH('MD5', 'toto'), 'ADHERENT'),
-    ('Robert', 'Hugo', 'hrobert', 'hugo.robert@email.com', HASH('MD5', 'toto'), 'ADHERENT'),
-    ('Richard', 'Lina', 'lrichard', 'lina.richard@email.com', HASH('MD5', 'toto'), 'ADHERENT'),
-    ('Moreau', 'Tom', 'tmoreau', 'tom.moreau@email.com', HASH('MD5', 'toto'), 'ADHERENT'),
-    ('Laurent', 'Chloé', 'claurent', 'chloe.laurent@email.com', HASH('MD5', 'toto'), 'ADHERENT'),
-    ('Simon', 'Nathan', 'nsimon', 'nathan.simon@email.com', HASH('MD5', 'toto'), 'ADHERENT');
+    ('Dupont', 'Marie', 'mdupont', 'marie.dupont@email.com', '$2a$12$xsDjxQSWotAhyMgMLWms8.kVYtO/dcMR7biK7TfsrvS3hMUG8lpQG', 'ADMIN'),
+    ('Toto', 'Curie', 'toto', 'curie.toto@email.com','$2a$12$xsDjxQSWotAhyMgMLWms8.kVYtO/dcMR7biK7TfsrvS3hMUG8lpQG', 'ADMIN'),
+    ('Bernard', 'Lucas', 'lbernard', 'lucas.bernard@email.com', '$2a$12$xsDjxQSWotAhyMgMLWms8.kVYtO/dcMR7biK7TfsrvS3hMUG8lpQG', 'TRESORIER'),
+    ('Martin', 'Sophie', 'smartin', 'sophie.martin@email.com', '$2a$12$xsDjxQSWotAhyMgMLWms8.kVYtO/dcMR7biK7TfsrvS3hMUG8lpQG', 'TRESORIER'),
+    ('Durand', 'Paul', 'pdurand', 'paul.durand@email.com','$2a$12$xsDjxQSWotAhyMgMLWms8.kVYtO/dcMR7biK7TfsrvS3hMUG8lpQG', 'ADHERENT'),
+    ('Petit', 'Emma', 'epetit', 'emma.petit@email.com','$2a$12$xsDjxQSWotAhyMgMLWms8.kVYtO/dcMR7biK7TfsrvS3hMUG8lpQG', 'ADHERENT'),
+    ('Robert', 'Hugo', 'hrobert', 'hugo.robert@email.com','$2a$12$xsDjxQSWotAhyMgMLWms8.kVYtO/dcMR7biK7TfsrvS3hMUG8lpQG', 'ADHERENT'),
+    ('Richard', 'Lina', 'lrichard', 'lina.richard@email.com','$2a$12$xsDjxQSWotAhyMgMLWms8.kVYtO/dcMR7biK7TfsrvS3hMUG8lpQG', 'ADHERENT'),
+    ('Moreau', 'Tom', 'tmoreau', 'tom.moreau@email.com','$2a$12$xsDjxQSWotAhyMgMLWms8.kVYtO/dcMR7biK7TfsrvS3hMUG8lpQG', 'ADHERENT'),
+    ('Laurent', 'Chloé', 'claurent', 'chloe.laurent@email.com','$2a$12$xsDjxQSWotAhyMgMLWms8.kVYtO/dcMR7biK7TfsrvS3hMUG8lpQG', 'ADHERENT'),
+    ('Simon', 'Nathan', 'nsimon', 'nathan.simon@email.com','$2a$12$xsDjxQSWotAhyMgMLWms8.kVYtO/dcMR7biK7TfsrvS3hMUG8lpQG', 'ADHERENT');
 
 -- =============================
 -- TABLE TRANSACTIONS

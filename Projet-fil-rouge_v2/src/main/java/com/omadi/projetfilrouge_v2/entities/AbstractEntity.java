@@ -4,7 +4,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
-
+/**
+ * Classe de base abstraite pour toutes les entités JPA du projet.
+ *
+ * ✅ Objectif :
+ *  - Fournir un champ "id" unique et généré automatiquement pour chaque entité.
+ *  - Définir des méthodes equals() et hashCode() cohérentes basées sur cet ID.
+ *
+ * 💡 Cette classe est conçue pour être héritée, pas instanciée directement.
+ */
 public class AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
